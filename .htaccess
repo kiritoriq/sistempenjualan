@@ -1,0 +1,27 @@
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews
+    </IfModule>
+
+    RewriteEngine On
+    RewriteBase /dnt_kki_2019
+
+    
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+    # Handle Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
+
+<FilesMatch "\.(htaccess|htpasswd|ini|psd|log|sh|env|sql|json|phar|yml)$">
+Order Allow,Deny
+Deny from all
+</FilesMatch>
+<Files "artisan">
+Order Allow,Deny
+Deny from all
+</Files>
