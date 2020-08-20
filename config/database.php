@@ -63,7 +63,8 @@ return [
         'tugumuda' => [
             'driver'    => 'mysql',
             'host'      => 'localhost',
-            'database'  => 'db_latihan_core_kki',
+            'port'      => 3308,
+            'database'  => 'sispen_ebisnis',
             'username'  => 'root',
             'password'  => '',
             'charset'   => 'utf8',

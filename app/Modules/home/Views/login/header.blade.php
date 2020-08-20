@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Sipenmaru Poltekkes Kemenkes Semarang</title>
+  <title>Sispen v1.0</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link href="{{ asset('packages/tugumuda/images/icon.png') }}" rel='icon' type='image/x-icon'/>
@@ -29,11 +29,11 @@
   <style>
     html{      
       /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#fefcea+0,f95339+100 */
-      background: #fefcea; /* Old browsers */
-      background: -moz-linear-gradient(top,  #fefcea 0%, #f95339 100%); /* FF3.6-15 */
-      background: -webkit-linear-gradient(top,  #fefcea 0%,#f95339 100%); /* Chrome10-25,Safari5.1-6 */
-      background: linear-gradient(to bottom,  #fefcea 0%,#f95339 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', endColorstr='#f95339',GradientType=0 ); /* IE6-9 */      
+      background: #1034a6; /* Old browsers */
+      background: -moz-linear-gradient(top,  #1034a6 0%, #f95339 100%); /* FF3.6-15 */
+      background: -webkit-linear-gradient(top,  #1034a6 0%,#f95339 100%); /* Chrome10-25,Safari5.1-6 */
+      background: linear-gradient(to bottom,  #1034a6 0%,#f95339 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1034a6', endColorstr='#f95339',GradientType=0 ); /* IE6-9 */      
     }
     body{
         padding-top: .62em;

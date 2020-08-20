@@ -5,13 +5,14 @@
   <div class="login-logo animated fadeInDown">
     <a href="{!!url()!!}">	  
       <!-- <img src="{!!asset('packages/tugumuda/images/logo.png')!!}" width="auto" height="120" alt="Poltekkes Kemenkes Semarang"> -->
-      <b>TUGUMUDA</b><br>CMSWEB ADMINISTRATOR
+      <div style="color: #fefcea;">
+      <b>Sistem Penjualan</b><br>WEB ADMINISTRATOR
+    </div>
     </a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body animated zoomIn">
     <p class="login-box-msg">LOGIN ADMIN</p>
-
     {!!Form::open(array('url' => url().'/login','id'=>'tampil', 'method' => 'POST'))!!}
       {!!csrf_field()!!}
 	  @if(\Session::get('msgerr') != '')
@@ -42,7 +43,7 @@
 
 
   </div>
-  <p class="text-center animated fadeInUp">&copy; 2017 Dinustek<br><b>Dian Nuswantoro Teknologi Informasi</b></a></p>
+  <p style="color: #fefcea;" class="text-center animated fadeInUp">&copy; 2019 &nbsp; All rights Reserved</p>
   <!-- /.login-box-body -->
 </div>
 <!-- /.login-box -->

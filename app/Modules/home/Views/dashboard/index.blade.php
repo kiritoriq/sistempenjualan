@@ -15,12 +15,12 @@ $(document).ready(function(){
                 type: 'column'
             },
             title: {
-                text: 'STATISTIK PORTAL '
+                text: ''
             },
             yAxis: {
                 allowDecimals: false,
                 title: {
-                    text: 'JUMLAH PENDAFTAR'
+                    text: 'JUMLAH TRANSAKSI'
                 }
             },
             tooltip: {
@@ -58,6 +58,43 @@ $(document).ready(function(){
 }
 </style>
 
+<?php
+  $barang = \DB::table('mast_barang')
+          ->select('*')
+          ->orderBy('kd_barang','asc')
+          ->get();
+  // foreach($barang as $b){
+  //   $kode = $b->kd_barang;    
+  // }        
+  //   $hasil = $kode[0];
+
+    $makanmasuk = \DB::table('tb_barang_inout')
+          ->where('kd_brg', 'LIKE', 'BA%')
+          ->sum('masuk');
+    $makankeluar = \DB::table('tb_barang_inout')
+          ->where('kd_brg', 'LIKE', 'BA%')
+          ->sum('keluar');
+
+    $minummasuk = \DB::table('tb_barang_inout')
+          ->where('kd_brg', 'LIKE', 'BB%')
+          ->sum('masuk');
+    $minumkeluar = \DB::table('tb_barang_inout')
+          ->where('kd_brg', 'LIKE', 'BB%')
+          ->sum('keluar'); 
+
+    $sembakomasuk = \DB::table('tb_barang_inout')
+          ->where('kd_brg', 'LIKE', 'BC%')
+          ->sum('masuk');
+    $sembakokeluar = \DB::table('tb_barang_inout')
+          ->where('kd_brg', 'LIKE', 'BC%')
+          ->sum('keluar');   
+      // foreach($stokmakan as $stok)
+      // {
+      //   $jml = $stok->masuk;
+      // }
+    // $hasil = $jml;
+?>
+
 <div id="loading-state">
     <p class='loadings' align='center'>
         <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>            
@@ -84,28 +121,28 @@ $(document).ready(function(){
       
 
       <div class="row">
-        <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="col-md-4 col-sm-6 col-xs-12">
           <div class="info-box">
-                <span class="info-box-icon bg-aqua"><i class="fa fa-fw fa-stethoscope"></i></span>
+                <span class="info-box-icon bg-aqua"><i class="fa fa-fw fa-cutlery"></i></span>
 
                 <div class="info-box-content">
-                  <span class="info-box-number">PROFESI BIDAN</span>
-                  <span class="info-box-text">Pendaftar : <b>12</b></span>
-                  <span class="info-box-text">Aktivasi : <b>12</b></span>
+                  <span class="info-box-number">Makanan</span>
+                  <span class="info-box-text">Pembelian : <b>{{$makanmasuk}}</b></span>
+                  <span class="info-box-text">Penjualan : <b>{{$makankeluar}}</b></span>
                 </div>
                 <!-- /.info-box-content -->
           </div>
           <!-- /.info-box -->
         </div>
 
-        <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="col-md-4 col-sm-6 col-xs-12">
           <div class="info-box">
-                <span class="info-box-icon bg-aqua-active"><i class="fa fa-fw fa-stethoscope"></i></span>
+                <span class="info-box-icon bg-aqua-active"><i class="fa fa-fw fa-glass"></i></span>
 
                 <div class="info-box-content">
-                  <span class="info-box-number">PROFESI NERS</span>
-                  <span class="info-box-text">Pendaftar : <b>12</b></span>
-                  <span class="info-box-text">Aktivasi : <b>12</b></span>
+                  <span class="info-box-number">Minuman</span>
+                  <span class="info-box-text">Pembelian : <b>{{$minummasuk}}</b></span>
+                  <span class="info-box-text">Penjualan : <b>{{$minumkeluar}}</b></span>
                 </div>
                 <!-- /.info-box-content -->
           </div>
@@ -113,14 +150,14 @@ $(document).ready(function(){
         </div>
 
         <!-- /.col -->
-        <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="col-md-4 col-sm-6 col-xs-12">
           <div class="info-box">
-                <span class="info-box-icon bg-yellow-active"><i class="fa fa-fw fa-stethoscope"></i></span>
+                <span class="info-box-icon bg-yellow-active"><i class="fa fa-fw fa-balance-scale"></i></span>
 
                 <div class="info-box-content">
-                  <span class="info-box-number">JALUR PMDP</span>
-                  <span class="info-box-text">Pendaftar : <b>12</b></span>
-                  <span class="info-box-text">Aktivasi : <b>12</b></span>
+                  <span class="info-box-number">Sembako</span>
+                  <span class="info-box-text">Pembelian : <b>{{$sembakomasuk}}</b></span>
+                  <span class="info-box-text">Penjualan : <b>{{$sembakokeluar}}</b></span>
                 </div>
                 <!-- /.info-box-content -->
           </div>
@@ -130,20 +167,6 @@ $(document).ready(function(){
 
         <!-- fix for small devices only -->
         <div class="clearfix visible-sm-block"></div>
-
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-                <span class="info-box-icon bg-green"><i class="fa fa-fw fa-stethoscope"></i></span>
-
-                <div class="info-box-content">
-                  <span class="info-box-number">JALUR UMUM</span>
-                  <span class="info-box-text">Pendaftar : <b>12</b></span>
-                  <span class="info-box-text">Aktivasi : <b>12</b></span>
-                </div>
-                <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
         <!-- /.col -->
         
         
@@ -165,9 +188,9 @@ $(document).ready(function(){
              ./box-body 
 
           </div>-->
-		  <div class="box box-success">
+		  <div class="box box-danger">
             <div class="box-header with-border">
-              <h3 class="box-title">Statistik Pendaftaran</h3>
+              <h3 class="box-title">Statistik Transaksi</h3>
 
               <div class="box-tools pull-right">
                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -181,42 +204,27 @@ $(document).ready(function(){
                         <table id='datatable' class='table table-striped table-hover table-condensed sortable'>                
                             <thead class="bg-green">
                                 <tr>
-                                    <th align="left">JALUR PENDAFTARAN</th>
-                                    <th class="text-center">PENDAFTAR</th>
-                                    <th class="text-center">AKTIVASI</th>                                
+                                    <th align="left">Jenis Barang</th>
+                                    <th class="text-center">PEMBELIAN</th>
+                                    <th class="text-center">PENJUALAN</th>                                
                                 </tr>
                             </thead>
                             <tbody>                                
                                 <tr>
-                                    <td>PROFESI BIDAN</td>
-                                    <td class="text-center">7</td>
-                                    <td class="text-center">12</td>                                    
+                                    <td>MAKANAN</td>
+                                    <td class="text-center">{{$makanmasuk}}</td>
+                                    <td class="text-center">{{$makankeluar}}</td>                                    
                                 </tr>                                                                
-                                <tr>                                                                        
-                                    <td>PROFESI NERS</td>
-                                    <td class="text-center">2</td>
-                                    <td class="text-center">5</td>                                    
+                                <tr>
+                                    <td>MINUMAN</td>
+                                    <td class="text-center">{{$minummasuk}}</td>
+                                    <td class="text-center">{{$minumkeluar}}</td>                                    
                                 </tr>                                                                
-                                <tr>                                                                                                            
-                                    <td>PMDP</td>
-                                    <td class="text-center">8</td>
-                                    <td class="text-center">10</td>                                    
+                                <tr>
+                                    <td>SEMBAKO</td>
+                                    <td class="text-center">{{$sembakomasuk}}</td>
+                                    <td class="text-center">{{$sembakokeluar}}</td>                                    
                                 </tr>                                                                
-                                <tr>                                                                                                            
-                                    <td>UMUM</td>
-                                    <td class="text-center">5</td>
-                                    <td class="text-center">8</td> 
-                                </tr>                                                                
-                                <tr>                                    
-                                    <td>MANDIRI</td>
-                                    <td class="text-center">8</td>
-                                    <td class="text-center">9</td> 
-                                </tr>
-                                <tr>                                                                                                            
-                                    <td>MAGISTER</td>
-                                    <td class="text-center">1</td>
-                                    <td class="text-center">2</td> 
-                                </tr>
                             </tbody>
                         </table>
                     </div>

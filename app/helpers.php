@@ -247,6 +247,25 @@ function select_hari($id = 0,$selected=''){
     return Form::select($id,$hari,$selected,array('style' => 'width:100%'));
 }
 
+function select_bulan($id = 0,$selected=''){
+    $h = "<select id='$id' name='$id' style='width:100%' class='form-control'>";    
+    $h .= '<option value="">Pilih Bulan</option>';
+    $h .= '<option '.(($selected == '01')?'selected':'').' value="01">Januari</option>';
+    $h .= '<option '.(($selected == '02')?'selected':'').' value="02">Februari</option>';
+    $h .= '<option '.(($selected == '03')?'selected':'').' value="03">Maret</option>';
+    $h .= '<option '.(($selected == '04')?'selected':'').' value="04">April</option>';
+    $h .= '<option '.(($selected == '05')?'selected':'').' value="05">Mei</option>';
+    $h .= '<option '.(($selected == '06')?'selected':'').' value="06">Juni</option>';
+    $h .= '<option '.(($selected == '07')?'selected':'').' value="07">Juli</option>';
+    $h .= '<option '.(($selected == '08')?'selected':'').' value="08">Agustus</option>';
+    $h .= '<option '.(($selected == '09')?'selected':'').' value="09">September</option>';
+    $h .= '<option '.(($selected == '10')?'selected':'').' value="10">Oktober</option>';
+    $h .= '<option '.(($selected == '11')?'selected':'').' value="11">November</option>';
+    $h .= '<option '.(($selected == '12')?'selected':'').' value="12">Desember</option>';
+    $h .= '</select>';
+    return $h;
+}
+
 function array_hari($id = 0,$selected=''){
     $hari = array("-", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu","Minggu","All Day");
     return $hari;
@@ -318,6 +337,62 @@ function header_dokumen(){
             '<link rel="stylesheet" href="'.getBaseURL(true).'/packages/tugumuda/claravel/assets/css/bootstrap-theme.css" />'.
             '<link rel="stylesheet" href="'.getBaseURL(true).'/packages/tugumuda/claravel/assets/css/bootstrap-icons.css" />';
 }
+
+function combojenis($id="",$sel="",$required="",$classtambahan=""){
+        $ret="<select id=\"$id\"name=\"$id\"$required style='width:100%;' class=\"form-control $id $classtambahan\">";
+        $ret.="<option value=\"\">.: Pilihan:.</option>";
+
+        $rs = \DB::table('tb_jns_brg')
+                ->orderBy('id','asc')
+                ->get();
+
+        foreach($rs as $idj){
+            $isSel=(($idj->id==$sel)?"selected":"");
+            $ret.="<option value=\"".$idj->id."\" $isSel >".$idj->id." - ".$idj->jenis."</option>";
+            }
+            $ret.="</select>";
+            return $ret;
+        }
+
+function combobarang($id="",$sel="",$required="",$classtambahan=""){
+        $ret="<select id=\"$id\"name=\"$id\"$required style='width:100%;' class=\"form-control $id $classtambahan\">";
+        $ret.="<option value=\"\">.: Pilihan:.</option>";
+
+        $rs = \DB::table('mast_barang')
+                ->join('tb_stok','mast_barang.kd_barang','=','tb_stok.kd_brg')
+                ->select(\DB::raw('mast_barang.kd_barang,tb_stok.jml_stok,tb_stok.hrg_jual_satuan,mast_barang.nm_barang, CONCAT(mast_barang.kd_barang," - ",mast_barang.nm_barang) as text'))
+                ->orderBy('mast_barang.id','asc')
+                ->get();
+
+        foreach($rs as $idj){
+            if($idj->jml_stok == 0){
+                $isSel=(($idj->kd_barang==$sel)?"selected":"");
+            $ret.="<option title=\"".$idj->text."\" dtvalue=\"".$idj->hrg_jual_satuan."\" value=\"".$idj->kd_barang."\" $isSel disabled>".$idj->text."</option>";
+            }else{
+                $isSel=(($idj->kd_barang==$sel)?"selected":"");
+                $ret.="<option title=\"".$idj->text."\" dtvalue=\"".$idj->hrg_jual_satuan."\" value=\"".$idj->kd_barang."\" $isSel >".$idj->text."</option>";
+                }
+            }
+            $ret.="</select>";
+            return $ret;
+        }
+
+function combosatuan($id="",$sel="",$required="",$classtambahan=""){
+        $ret="<select id=\"$id\"name=\"$id\"$required style='width:100%;' class=\"form-control $id $classtambahan\">";
+        $ret.="<option value=\"\">.: Pilihan:.</option>";
+
+        $rs = \DB::table('tb_satuan')
+                ->orderBy('id','asc')
+                ->get();
+
+        foreach($rs as $idj){
+            $isSel=(($idj->id==$sel)?"selected":"");
+            $ret.="<option value=\"".$idj->id."\" $isSel >".$idj->id." - ".$idj->satuan."</option>";
+            }
+            $ret.="</select>";
+            return $ret;
+        }
+        
 
 function hari($hari){
     switch ($hari){

@@ -1,9 +1,9 @@
   {!!modal(false,'main_modal2')!!}
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
-      <b>Version</b> 2.3.3
+      <b>Version</b> 1.0
     </div>
-    <strong>Copyright &copy; 2014-{{date('Y')}} <a href="http://dinustek.com">Dinustek</a>.</strong> All rights
+    <strong>Copyright &copy; {{date('Y')}}</strong> All rights
     reserved.
   </footer>
 

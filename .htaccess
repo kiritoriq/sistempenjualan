@@ -4,7 +4,7 @@
     </IfModule>
 
     RewriteEngine On
-    RewriteBase /dnt_kki_2019
+    RewriteBase /Projects/sispen_ebisnis
 
     
     # Redirect Trailing Slashes If Not A Folder...

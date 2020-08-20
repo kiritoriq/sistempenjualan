@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{$_ENV['configurations']['site-name']}}</title>
+    <title>Sistem Penjualan v1.0</title>
     <meta name="robots" content="noindex">
     <link href="{{ asset('packages/tugumuda/images/icon.png') }}" rel='icon' type='image/x-icon'/>
     
@@ -204,41 +204,62 @@ $(document).ready(function(){
             }
    
 
-        function autoComplete(element, url, ph, dataPost){
-            element.select2({
+        function autoComplete(element, url, ph, dataPost, id, text, parent, parent2){
+            $(element).select2({
+                /*initSelection: function(element, callback) {
+                    callback({id: id, text: text });
+                },*/
+                placeholder: ph,
+                /*minimumInputLength: 3,*/
+                closeOnSelect: true,
+                allowClear: true,
+                quietMillis: 250,
+                ajax: {
+                    url: url,
+                    dataType: 'json',
+                    delay: 250,
+                    type:'post',
+                    data: function (params) {
+                        return {
+                            keyword: params.term, //search term
+                            per_page: 10, // page size
+                            page: params.page, // page number
+                            parent : parent,
+                            parent2 : parent2,
+                            _token : '{!!csrf_token()!!}'
+                        };
+                    },
+                    processResults: function (data, params) {
+                        // parse the results into the format expected by Select2
+                        // since we are using custom formatting functions we do not need to
+                        // alter the remote JSON data, except to indicate that infinite
+                        // scrolling can be used
 
-        ajax: {
-            url: url,
-            dataType: 'json',
-            delay: 250,
-            data: function (params) {
-              return {
-                    keyword: params.term, //search term
-                    per_page: 5, // page size
-                    page: params.page // page number
-              };
-            },
-            processResults: function (data, params) {
-              // parse the results into the format expected by Select2
-              // since we are using custom formatting functions we do not need to
-              // alter the remote JSON data, except to indicate that infinite
-              // scrolling can be used
-              params.page = params.page || 1;
-              return {
-                results: data.rows,
-              };
-            },
-            cache: true
-          },
-        //  escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-          minimumInputLength: 3,
-        //      formatResult: tmlhrFormatResult, 
-        //      formatSelection: tmlhrFormatSelection
+                        params.page = params.page || 1;
 
+                        return {
+                            results: data.rows,
+                            pagination: {
+                                more: (params.page * 5) < data.result
+                            }
+                        };
 
-
-
+                    },
+                    cache: true
+                },
+                escapeMarkup: function (markup) { return markup; },
+                //tags: true
+                //  escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+                /*formatResult: FormatResult,
+                formatSelection: FormatSelection*/
             });
+
+            if(id != '' && id != null){
+                // console.log()
+                $(element).data('select2').trigger('select', {
+                    data: {"id":id,"text":text, "dtvalue": dtvalue,}
+                });
+            }
         }            
               
             function loading(elemen){
@@ -345,9 +366,9 @@ $(document).ready(function(){
     <!-- Logo -->
     <a href="{!!url()!!}/dashboard" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>T</b>M</span>
+      <span class="logo-mini"><b>SI</b>P</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><b>TUGU</b>MUDA cms</span>
+      <span class="logo-lg"><b>SI</b>P Sispen</span>
     </a>
 
     <!-- Header Navbar: style can be found in header.less -->
